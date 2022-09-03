@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             BlocBuilder<CounterCubit, CounterState>(
               builder: (context, state) {
-                return Text(state.counterValue.toString(), style: TextStyle(fontSize: 20));
+                return Text(state.counterValue.toString(), style: const TextStyle(fontSize: 20));
               },
             ),
             Row(
@@ -37,12 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: () {
                       BlocProvider.of<CounterCubit>(context).increment();
                     },
-                    child: Icon(Icons.add)),
+                    child: const Icon(Icons.add)),
                 ElevatedButton(
                     onPressed: () {
                       BlocProvider.of<CounterCubit>(context).decrement();
                     },
-                    child: Icon(Icons.remove))
+                    child: const Icon(Icons.remove))
               ],
             )
           ],
