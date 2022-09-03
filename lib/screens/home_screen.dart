@@ -25,9 +25,18 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 8,
             ),
-            BlocBuilder<CounterCubit, CounterState>(
+            BlocConsumer<CounterCubit, CounterState>(
+              listener: (context, state) {
+                if (state.myBoolean) {
+                  print('My boolean is true hence this is executed');
+                }
+                else {
+                  print('My boolean is false hence this is executed');
+                }
+              },
               builder: (context, state) {
-                return Text(state.counterValue.toString(), style: const TextStyle(fontSize: 20));
+                return Text(state.counterValue.toString(),
+                    style: const TextStyle(fontSize: 20));
               },
             ),
             Row(
