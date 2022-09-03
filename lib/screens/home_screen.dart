@@ -1,4 +1,5 @@
 import 'package:bloc_tutorial/cubit/counter_cubit.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,10 +29,14 @@ class _HomeScreenState extends State<HomeScreen> {
             BlocConsumer<CounterCubit, CounterState>(
               listener: (context, state) {
                 if (state.myBoolean) {
-                  print('My boolean is true hence this is executed');
+                  if (kDebugMode) {
+                    print('My boolean is true hence this is executed');
+                  }
                 }
                 else {
-                  print('My boolean is false hence this is executed');
+                  if (kDebugMode) {
+                    print('My boolean is false hence this is executed');
+                  }
                 }
               },
               builder: (context, state) {
