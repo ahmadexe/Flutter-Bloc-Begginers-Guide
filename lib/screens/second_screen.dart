@@ -1,20 +1,16 @@
-import 'dart:developer';
-
 import 'package:bloc_tutorial/cubit/counter_cubit.dart';
-import 'package:bloc_tutorial/screens/second_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class SecondScreen extends StatefulWidget {
+  const SecondScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<SecondScreen> createState() => _SecondScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _SecondScreenState extends State<SecondScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text("This is page 1"),
+            const Text("This is page 2"),
             const Text(
               "This is the current counter",
               style: TextStyle(fontSize: 20),
@@ -63,10 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     child: const Icon(Icons.remove))
               ],
-            ),
-            ElevatedButton(onPressed: (){Get.to(BlocProvider.value(
-              value: BlocProvider.of<CounterCubit>(context),
-              child: SecondScreen()));}, child: const Text("Get to Screen 2")),
+            )
           ],
         ),
       ),
