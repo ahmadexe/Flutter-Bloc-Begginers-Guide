@@ -37,8 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   if (kDebugMode) {
                     print('My boolean is true hence this is executed');
                   }
-                }
-                else {
+                } else {
                   if (kDebugMode) {
                     print('My boolean is false hence this is executed');
                   }
@@ -64,9 +63,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: const Icon(Icons.remove))
               ],
             ),
-            ElevatedButton(onPressed: (){Get.to(BlocProvider.value(
-              value: BlocProvider.of<CounterCubit>(context),
-              child: SecondScreen()));}, child: const Text("Get to Screen 2")),
+            ElevatedButton(
+                onPressed: () {
+                  MaterialPageRoute(
+                      builder: (_) => BlocProvider.value(
+                            value: BlocProvider.of<CounterCubit>(context),
+                            child: const SecondScreen(),
+                          ));
+                },
+                child: const Text("Get to Screen 2")),
           ],
         ),
       ),

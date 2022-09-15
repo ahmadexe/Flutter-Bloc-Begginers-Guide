@@ -1,7 +1,10 @@
 import 'package:bloc_tutorial/cubit/counter_cubit.dart';
+import 'package:bloc_tutorial/screens/home_screen.dart';
+import 'package:bloc_tutorial/screens/third_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 class SecondScreen extends StatefulWidget {
   const SecondScreen({super.key});
@@ -33,8 +36,7 @@ class _SecondScreenState extends State<SecondScreen> {
                   if (kDebugMode) {
                     print('My boolean is true hence this is executed');
                   }
-                }
-                else {
+                } else {
                   if (kDebugMode) {
                     print('My boolean is false hence this is executed');
                   }
@@ -59,7 +61,20 @@ class _SecondScreenState extends State<SecondScreen> {
                     },
                     child: const Icon(Icons.remove))
               ],
-            )
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  print("Work");
+                  MaterialPageRoute(builder:  (_2) =>
+                    BlocProvider.value(
+                      value: BlocProvider.of<CounterCubit>(context),
+                      child: const ThirdScreen(),
+                    )
+                  );
+                  print("Worked");
+
+                },
+                child: const Text("Go To third screen"))
           ],
         ),
       ),
