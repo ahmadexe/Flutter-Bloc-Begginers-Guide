@@ -65,12 +65,13 @@ class _SecondScreenState extends State<SecondScreen> {
             ElevatedButton(
                 onPressed: () {
                   print("Work");
+                  Navigator.of(context).push(
                   MaterialPageRoute(builder:  (_2) =>
                     BlocProvider.value(
                       value: BlocProvider.of<CounterCubit>(context),
                       child: const ThirdScreen(),
                     )
-                  );
+                  ));
                   print("Worked");
 
                 },
