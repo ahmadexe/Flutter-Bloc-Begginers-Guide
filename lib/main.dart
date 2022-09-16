@@ -1,3 +1,4 @@
+import 'package:bloc_tutorial/cubit/bulb_cubit.dart';
 import 'package:bloc_tutorial/cubit/counter_cubit.dart';
 import 'package:bloc_tutorial/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -18,12 +19,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<CounterCubit>(
-      create: (context) => CounterCubit(),
-      child: const GetMaterialApp(
-        title: 'Bloc tutorial',
-        home: HomeScreen(),
-      ),
-    );
+    return MultiBlocProvider(providers: [
+      BlocProvider(create: (_) => BulbCubit()),
+      BlocProvider(create: (_) => CounterCubit()),
+
+    ], child: MaterialApp(
+      home: HomeScreen(),
+      ));
   }
 }
