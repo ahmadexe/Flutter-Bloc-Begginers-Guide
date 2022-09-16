@@ -20,9 +20,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return BlocProvider<CounterCubit>(
       create: (context) => CounterCubit(),
-      child: GetMaterialApp(
+      child: const GetMaterialApp(
         title: 'Bloc tutorial',
-        home: const HomeScreen(),
+        home: HomeScreen(),
       ),
     );
   }
