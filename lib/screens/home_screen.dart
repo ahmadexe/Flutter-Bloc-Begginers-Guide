@@ -67,10 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () {
                   Navigator.of(context).push(
                   MaterialPageRoute(
-                      builder: (_) => BlocProvider.value(
-                            value: BlocProvider.of<CounterCubit>(context),
-                            child: const SecondScreen(),
-                          )));
+                      builder: (_) => const SecondScreen()));
                 },
                 child: const Text("Get to Screen 2")),
           ],

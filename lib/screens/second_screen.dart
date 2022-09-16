@@ -63,17 +63,11 @@ class _SecondScreenState extends State<SecondScreen> {
               ],
             ),
             ElevatedButton(
-                onPressed: () {
-                  print("Work");
-                  Navigator.of(context).push(
-                  MaterialPageRoute(builder:  (_2) =>
-                    BlocProvider.value(
-                      value: BlocProvider.of<CounterCubit>(context),
-                      child: const ThirdScreen(),
-                    )
+                onPressed: () async {
+                  await Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder:  (_) =>
+                    const ThirdScreen()
                   ));
-                  print("Worked");
-
                 },
                 child: const Text("Go To third screen"))
           ],

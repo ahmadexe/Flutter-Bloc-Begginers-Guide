@@ -18,11 +18,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Bloc tutorial',
-      home: BlocProvider(
-        create: (context) => CounterCubit(),
-        child: const HomeScreen(),
+    return BlocProvider<CounterCubit>(
+      create: (context) => CounterCubit(),
+      child: GetMaterialApp(
+        title: 'Bloc tutorial',
+        home: const HomeScreen(),
       ),
     );
   }
