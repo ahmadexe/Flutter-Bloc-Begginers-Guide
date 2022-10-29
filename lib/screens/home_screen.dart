@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:bloc_tutorial/cubit/bulb_cubit.dart';
 import 'package:bloc_tutorial/cubit/counter_cubit.dart';
 import 'package:bloc_tutorial/screens/second_screen.dart';
+import 'package:bloc_tutorial/try.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -74,8 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
               }),
               ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (_) => const SecondScreen()));
+                    Nav(context, SecondScreen());
                   },
                   child: const Text("Get to Screen 2")),
             ],
