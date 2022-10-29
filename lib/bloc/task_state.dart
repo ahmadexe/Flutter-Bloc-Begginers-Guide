@@ -1,6 +1,11 @@
 part of 'task_bloc.dart';
 
-@immutable
-abstract class TaskState {}
-
-class TaskInitial extends TaskState {}
+class TaskState {
+  late List<Task> tasks;
+  
+  TaskState({required this.tasks});
+  
+  TaskState.init() {
+    tasks = <Task>[];
+  }
+}
