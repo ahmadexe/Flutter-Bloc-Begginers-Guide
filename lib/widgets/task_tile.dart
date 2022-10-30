@@ -12,12 +12,17 @@ class TaskTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ListTile(
-          title: Text(task.title),
-          subtitle: Text(task.description),
-          trailing: Checkbox(value: task.isDone, onChanged: (value){
-            context.read<TaskBloc>().add(UpdateTask(index: index));
-          }),
+        GestureDetector(
+          onDoubleTap: () {
+            context.read<TaskBloc>().add(DeleteTask(task: task));
+          },
+          child: ListTile(
+            title: Text(task.title),
+            subtitle: Text(task.description),
+            trailing: Checkbox(value: task.isDone, onChanged: (value){
+              context.read<TaskBloc>().add(ToggleDone(index: index));
+            }),
+          ),
         ),
         const Divider()
       ],
