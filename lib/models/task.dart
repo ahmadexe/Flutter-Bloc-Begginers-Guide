@@ -24,4 +24,8 @@ class Task {
       isDone: map['isDone'] as bool,
     );
   }
+
+  bool isEqual(Task task) {
+    return this.title == task.title && this.description == task.description && this.isDone == task.isDone;
+  }
 }

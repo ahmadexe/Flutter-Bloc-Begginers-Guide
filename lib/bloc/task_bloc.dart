@@ -11,23 +11,41 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     on<AddTask>((event, emit) {
       emit(TaskState(tasks: state.tasks..add(event.task)));
     });
-    on<DeleteTask>((event, emit) {
-      emit(TaskState(tasks: state.tasks..remove(event.task))); 
-    });
+    on<DeleteTask>(_deleteTask);
     on<UpdateTask>(_updateTask);
+    on<ToggleDone>(_toggleDone);
+  }
+
+  _toggleDone(ToggleDone event, Emitter<TaskState> emit) {
+    var state = this.state;
+    var tasks = state.tasks;
+    tasks[event.index].isDone = !tasks[event.index].isDone;
+    emit(TaskState(tasks: tasks));
+  }
+
+  _deleteTask(DeleteTask event, Emitter<TaskState> emit) {
+    final state = this.state;
+    var tasks = state.tasks;
+    for (int i = 0; i < tasks.length; i++) {
+      if (tasks[i].isEqual(event.task)) {
+        tasks.removeAt(i);
+        break;
+      }
+    }
+    emit(TaskState(tasks: tasks));
   }
 
   _updateTask(UpdateTask event, Emitter<TaskState> emit) {
     final state = this.state;
+    var allTasks = state.tasks;
     bool updateTitle = event.name != null;
-    bool updateDescription = event.description != null;
-    
+    bool updateDescription = event.description != null;    
     if (updateTitle) {
-      state.tasks[event.index].title = event.name!;
+      allTasks[event.index].title = event.name!;
     }
-
     if (updateDescription) {
-      state.tasks[event.index].description = event.description!;
+      allTasks[event.index].description = event.description!;
     }
+    emit(TaskState(tasks: allTasks));
   }
 }

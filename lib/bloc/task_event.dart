@@ -29,3 +29,10 @@ class UpdateTask implements TaskEvent{
   });
   
 }
+
+class ToggleDone implements TaskEvent {
+  int index;
+  ToggleDone({
+    required this.index,
+  });
+}

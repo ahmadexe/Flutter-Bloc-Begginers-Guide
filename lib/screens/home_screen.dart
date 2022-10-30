@@ -110,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     shrinkWrap: true,
                     itemCount: state.tasks.length,
                     itemBuilder: (context, index) {
-                      return TaskTile(task: state.tasks[index]);
+                      return TaskTile(task: state.tasks[index], index: index,);
                     },
                   );
                 },
