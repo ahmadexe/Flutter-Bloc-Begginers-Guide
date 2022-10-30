@@ -1,19 +1,29 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:bloc_tutorial/models/task.dart';
+import 'package:flutter/foundation.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:meta/meta.dart';
 
 part 'task_event.dart';
 part 'task_state.dart';
 
-class TaskBloc extends Bloc<TaskEvent, TaskState> {
+class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
 
-  TaskBloc() : super(TaskState.init()) {
-    on<AddTask>((event, emit) {
-      emit(TaskState(tasks: state.tasks..add(event.task)));
-    });
+  TaskBloc() : super(TaskState(tasks: [])) {
+    // hydrate();
+    on<AddTask>(_addTask);
     on<DeleteTask>(_deleteTask);
     on<UpdateTask>(_updateTask);
     on<ToggleDone>(_toggleDone);
+  }
+
+  _addTask(AddTask event, Emitter<TaskState> emit) {
+    var state = this.state;
+    var tasks = state.tasks;
+    tasks.add(event.task);
+    emit(TaskState(tasks: tasks));
   }
 
   _toggleDone(ToggleDone event, Emitter<TaskState> emit) {
@@ -47,5 +57,26 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       allTasks[event.index].description = event.task.description;
     }
     emit(TaskState(tasks: allTasks));
+  }
+  
+  @override
+  TaskState? fromJson(Map<String, dynamic> json) {
+    if (kDebugMode) {
+      print("Reached");
+    }
+    if (kDebugMode) {
+      print(json);
+    }
+    return TaskState(tasks: json['tasks'] as List<Task>);
+  }
+  
+  @override
+  Map<String, dynamic>? toJson(TaskState state) {
+    if (kDebugMode) {
+      print("2 ${state.toMap()}");
+    }
+    
+    return state.toMap();
+    // return {'tasks':[{'title':'gcc','description':'abc','isDone':false}]};
   }
 }

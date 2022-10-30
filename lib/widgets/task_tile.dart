@@ -4,11 +4,16 @@ import 'package:bloc_tutorial/screens/update_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class TaskTile extends StatelessWidget {
+class TaskTile extends StatefulWidget {
   final Task task;
   final int index;
   const TaskTile({required this.index, required this.task, super.key});
 
+  @override
+  State<TaskTile> createState() => _TaskTileState();
+}
+
+class _TaskTileState extends State<TaskTile> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -16,18 +21,18 @@ class TaskTile extends StatelessWidget {
         GestureDetector(
           onLongPress: () {
             Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => UpdateScreen(index: index)));
+                MaterialPageRoute(builder: (_) => UpdateScreen(index: widget.index)));
           },
           onDoubleTap: () {
-            context.read<TaskBloc>().add(DeleteTask(task: task));
+            context.read<TaskBloc>().add(DeleteTask(task: widget.task));
           },
           child: ListTile(
-            title: Text(task.title!),
-            subtitle: Text(task.description!),
+            title: Text(widget.task.title!),
+            subtitle: Text(widget.task.description!),
             trailing: Checkbox(
-                value: task.isDone,
+                value: widget.task.isDone,
                 onChanged: (value) {
-                  context.read<TaskBloc>().add(ToggleDone(index: index));
+                  context.read<TaskBloc>().add(ToggleDone(index: widget.index));
                 }),
           ),
         ),

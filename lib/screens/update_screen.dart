@@ -3,10 +3,17 @@ import 'package:bloc_tutorial/models/task.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class UpdateScreen extends StatelessWidget {
+class UpdateScreen extends StatefulWidget {
   final int index;
   UpdateScreen({required this.index, super.key});
+
+  @override
+  State<UpdateScreen> createState() => _UpdateScreenState();
+}
+
+class _UpdateScreenState extends State<UpdateScreen> {
   TextEditingController _titleController = TextEditingController();
+
   TextEditingController _descController = TextEditingController();
 
   @override
@@ -53,10 +60,10 @@ class UpdateScreen extends StatelessWidget {
                         title: _titleController.text,
                         description: _descController.text,
                         isDone:
-                            context.read<TaskBloc>().state.tasks[index].isDone);
+                            context.read<TaskBloc>().state.tasks[widget.index].isDone);
                     context
                         .read<TaskBloc>()
-                        .add(UpdateTask(index: index, task: task));
+                        .add(UpdateTask(index: widget.index, task: task));
                   },
                   child: const Text("Update!"))
             ],

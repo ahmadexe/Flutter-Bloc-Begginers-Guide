@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class Task {
   String? title;
@@ -9,6 +11,26 @@ class Task {
     required this.isDone
   });
 
+  // Map<String, dynamic> toMap() {
+  //   return <String, dynamic>{
+  //     'title': title,
+  //     'description': description,
+  //     'isDone': isDone,
+  //   };
+  // }
+
+  // factory Task.fromMap(Map<String, dynamic> map) {
+  //   return Task(
+  //     title: map['title'] as String,
+  //     description: map['description'] as String,
+  //     isDone: map['isDone'] as bool,
+  //   );
+  // }
+
+  bool isEqual(Task task) {
+    return this.title == task.title && this.description == task.description && this.isDone == task.isDone;
+  }
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'title': title,
@@ -19,13 +41,13 @@ class Task {
 
   factory Task.fromMap(Map<String, dynamic> map) {
     return Task(
-      title: map['title'] as String,
-      description: map['description'] as String,
+      title: map['title'],
+      description: map['description'],
       isDone: map['isDone'] as bool,
     );
   }
 
-  bool isEqual(Task task) {
-    return this.title == task.title && this.description == task.description && this.isDone == task.isDone;
-  }
+  // String toJson() => json.encode(toMap());
+
+  // factory Task.fromJson(String source) => Task.fromMap(json.decode(source) as Map<String, dynamic>);
 }
