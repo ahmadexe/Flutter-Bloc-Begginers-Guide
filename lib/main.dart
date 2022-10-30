@@ -1,8 +1,10 @@
+import 'package:bloc_tutorial/bloc/task_bloc.dart';
 import 'package:bloc_tutorial/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main(List<String> args) {
-  runApp(const MyApp());  
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -10,8 +12,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomeScreen(),
+    return BlocProvider(
+      create: (context) => TaskBloc(),
+      child: const MaterialApp(
+        home: HomeScreen(),
+      ),
     );
   }
 }
