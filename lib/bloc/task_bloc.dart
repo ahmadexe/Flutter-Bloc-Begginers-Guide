@@ -38,13 +38,13 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   _updateTask(UpdateTask event, Emitter<TaskState> emit) {
     final state = this.state;
     var allTasks = state.tasks;
-    bool updateTitle = event.name != null;
-    bool updateDescription = event.description != null;    
+    bool updateTitle = event.task.title != null;
+    bool updateDescription = event.task.description != null;    
     if (updateTitle) {
-      allTasks[event.index].title = event.name!;
+      allTasks[event.index].title = event.task.title;
     }
     if (updateDescription) {
-      allTasks[event.index].description = event.description!;
+      allTasks[event.index].description = event.task.description;
     }
     emit(TaskState(tasks: allTasks));
   }

@@ -18,16 +18,13 @@ class DeleteTask implements TaskEvent{
   });
 }
 
-class UpdateTask implements TaskEvent{
-  String? name;
+class UpdateTask implements TaskEvent {
+  Task task;
   int index;
-  String? description;
   UpdateTask({
     required this.index,
-    this.name,
-    this.description,
+    required this.task,
   });
-  
 }
 
 class ToggleDone implements TaskEvent {

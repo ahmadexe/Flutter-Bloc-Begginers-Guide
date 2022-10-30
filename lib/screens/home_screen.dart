@@ -61,6 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 8,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextButton(
                             onPressed: () {
@@ -110,7 +111,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     shrinkWrap: true,
                     itemCount: state.tasks.length,
                     itemBuilder: (context, index) {
-                      return TaskTile(task: state.tasks[index], index: index,);
+                      return TaskTile(
+                        task: state.tasks[index],
+                        index: index,
+                      );
                     },
                   );
                 },

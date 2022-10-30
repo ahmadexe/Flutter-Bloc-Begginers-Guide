@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class Task {
-  String title;
-  String description;
+  String? title;
+  String? description;
   bool isDone;
   Task({
     required this.title,
