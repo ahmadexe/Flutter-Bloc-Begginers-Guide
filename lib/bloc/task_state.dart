@@ -8,18 +8,6 @@ class TaskState {
     this.tasks = const <Task>[],
   });
 
-  // Map<String, dynamic> toMap() {
-  //   return <String, dynamic>{
-  //     'tasks': tasks.map((x) => x.toMap()).toList(),
-  //   };
-  // }
-
-  // factory TaskState.fromMap(Map<String, dynamic> map) {
-  //   return TaskState(
-  //     tasks: List<Task>.from((map['tasks'] as List<int>).map<Task>((x) => Task.fromMap(x as Map<String,dynamic>),),),
-  //   );
-  // }
-
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'tasks': tasks.map((x) => x.toMap()).toList(),
@@ -27,7 +15,6 @@ class TaskState {
   }
 
   factory TaskState.fromMap(Map<String, dynamic> map) {
-    print("Check here");
     return TaskState(
       tasks: List<Task>.from(map['tasks']?.map((x) => Task.fromMap(x))),
     );
