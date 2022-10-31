@@ -1,5 +1,4 @@
 import 'package:bloc_tutorial/bloc/task_bloc.dart';
-import 'package:bloc_tutorial/models/task.dart';
 import 'package:bloc_tutorial/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

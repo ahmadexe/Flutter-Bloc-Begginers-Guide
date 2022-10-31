@@ -92,37 +92,35 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _addTaskWidget(context),
-        child: const Icon(Icons.add),
-      ),
-      appBar: AppBar(
-        title: const Text("Tasks"),
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              BlocBuilder<TaskBloc, TaskState>(
-                builder: (context, state) {
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: state.tasks.length,
-                    itemBuilder: (context, index) {
-                      return TaskTile(
-                        task: state.tasks[index],
-                        index: index,
-                      );
-                    },
-                  );
-                },
-              )
-            ],
+    return BlocBuilder<TaskBloc, TaskState>(
+      builder: ((context, state) {
+        List<Task> tasksList = state.tasks;
+        return Scaffold(
+          floatingActionButton: FloatingActionButton(
+            onPressed: () => _addTaskWidget(context),
+            child: const Icon(Icons.add),
           ),
-        ),
-      ),
+          appBar: AppBar(
+            title: const Text("Tasks"),
+          ),
+          body: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: tasksList.length,
+                    itemBuilder: ((context, index) {
+                      return TaskTile(index: index, task: tasksList[index]);
+                    })
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      }),
     );
   }
 }

@@ -2,9 +2,11 @@
 part of 'task_bloc.dart';
 
 class TaskState {
-  List<Task> tasks;
+  final List<Task> tasks;
   
-  TaskState({required this.tasks});
+  const TaskState({
+    this.tasks = const <Task>[],
+  });
 
   // Map<String, dynamic> toMap() {
   //   return <String, dynamic>{
@@ -27,11 +29,7 @@ class TaskState {
   factory TaskState.fromMap(Map<String, dynamic> map) {
     print("Check here");
     return TaskState(
-      tasks: List<Task>.from((map['tasks'] as List<Task>).map<Task>((x) => Task.fromMap(x as Map<String,dynamic>),),),
+      tasks: List<Task>.from(map['tasks']?.map((x) => Task.fromMap(x))),
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory TaskState.fromJson(String source) => TaskState.fromMap(json.decode(source) as Map<String, dynamic>);
 }

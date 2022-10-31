@@ -11,7 +11,7 @@ part 'task_state.dart';
 
 class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
 
-  TaskBloc() : super(TaskState(tasks: [])) {
+  TaskBloc() : super(const TaskState()) {
     // hydrate();
     on<AddTask>(_addTask);
     on<DeleteTask>(_deleteTask);
@@ -20,10 +20,12 @@ class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
   }
 
   _addTask(AddTask event, Emitter<TaskState> emit) {
-    var state = this.state;
-    var tasks = state.tasks;
-    tasks.add(event.task);
-    emit(TaskState(tasks: tasks));
+    final state = this.state;
+    emit(
+      TaskState(
+        tasks: List.from(state.tasks)..add(event.task)
+      )
+    );
   }
 
   _toggleDone(ToggleDone event, Emitter<TaskState> emit) {
@@ -61,22 +63,11 @@ class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
   
   @override
   TaskState? fromJson(Map<String, dynamic> json) {
-    if (kDebugMode) {
-      print("Reached");
-    }
-    if (kDebugMode) {
-      print(json);
-    }
-    return TaskState(tasks: json['tasks'] as List<Task>);
+    return TaskState.fromMap(json);
   }
   
   @override
   Map<String, dynamic>? toJson(TaskState state) {
-    if (kDebugMode) {
-      print("2 ${state.toMap()}");
-    }
-    
     return state.toMap();
-    // return {'tasks':[{'title':'gcc','description':'abc','isDone':false}]};
   }
 }
