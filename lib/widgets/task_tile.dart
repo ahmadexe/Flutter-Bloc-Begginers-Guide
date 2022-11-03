@@ -20,15 +20,19 @@ class _TaskTileState extends State<TaskTile> {
       children: [
         GestureDetector(
           onLongPress: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => UpdateScreen(index: widget.index)));
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => UpdateScreen(index: widget.index)));
           },
           onDoubleTap: () {
             context.read<TaskBloc>().add(DeleteTask(task: widget.task));
           },
           child: ListTile(
             title: Text(widget.task.title!),
-            subtitle: Text(widget.task.description!),
+            subtitle: Text(widget.task.description!,
+                style: TextStyle(
+                    decoration: widget.task.isDone
+                        ? TextDecoration.lineThrough
+                        : null)),
             trailing: Checkbox(
                 value: widget.task.isDone,
                 onChanged: (value) {
